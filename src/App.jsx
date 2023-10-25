@@ -3,93 +3,65 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Montaje from './components/Montaje';
-import Loading from './components/Loading';
 import ListItemContainer from './components/ListItemContainer';
+import { ComponentWithLogging } from './components/HOC';
 
 
-const fetchData = () => {
+// const fetchData = () => {
 
-  return new Promise((resolve) => {
-    const response = "Resuelta";
+//   return new Promise((resolve) => {
+//     const response = "Resuelta";
 
-    setTimeout(() => {
-      resolve(response)
-    }, 2000)
-  })
-}
-
+//     setTimeout(() => {
+//       resolve(response)
+//     }, 2000)
+//   })
+// }
 
 
 
 function App() {
   
-  const [data, setData] = useState(null)
+  const [pokemons, setPokemon] = useState([]);
 
-  const obtenerProductos = () => {
-
-    return new Promise((resolve, reject) => {
-  
-     const productos = [
-      {
-        id: '1',
-        name: 'Producto 1',
-        description: 'Descripción del Producto 1',
-        price: 10.99,
-        stock: 100,
-      },
-      {
-        id: '2',
-        name: 'Producto 2',
-        description: 'Descripción del Producto 2',
-        price: 19.99,
-        stock: 50,
-      },
-      {
-        id: '3',
-        name: 'Producto 3',
-        description: 'Descripción del Producto 3',
-        price: 7.99,
-        stock: 75,
-      },
-    ];
-  
-      setTimeout(() => {
-        resolve(productos);
-      }, 3000)
-  
-    });
-  }
-  
-  
+  const getPokemons = () => {
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=10&offset=0")
+    .then(response => response.json())
+    .then(data =>{
+      setPokemon(data.results)
+    } )
+  };
 
   useEffect(() => {
-    // fetchData().then(datos => {
-    //   console.log(datos);
-    //   setData(datos)
-    // })
-
-
-    // llamarPromise().then(datos => {
-    //   console.log(datos)
-    // })
-
-    obtenerProductos().then( datos => {
-      console.log(datos)
-      setData(datos);
-    } )
-  }, [])
-
-
-
+    getPokemons();
+    console.log(pokemons)
+  }, []);
 
 
   return (
     <div>
+       <h2>Pokemons</h2>
 
-        <ListItemContainer productos={data}/>
+       {/*PRACTICA CON POKE API */}
+      {/* <div>
+      {pokemons ? (
+          pokemons.map((poke) => (
+            <p key={poke.name}>{poke.name}</p>
+          ))
+        ) : (
+          <p>Cargando...</p>
+        )}
+      </div> */}
+
+        {/* PRACTICA HOC */}
+        <ComponentWithLogging/>
+
+        {/* <ListItemContainer productos={data}/> */}
 
 
       {/* <Montaje /> */}
+
+    
     </div>
   );
 }
