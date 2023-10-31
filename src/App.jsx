@@ -5,6 +5,7 @@ import './App.css'
 import Montaje from './components/Montaje';
 import ListItemContainer from './components/ListItemContainer';
 import { ComponentWithLogging } from './components/HOC';
+import Routing from './components/Routing';
 
 
 // const fetchData = () => {
@@ -21,15 +22,15 @@ import { ComponentWithLogging } from './components/HOC';
 
 
 function App() {
-  
+
   const [pokemons, setPokemon] = useState([]);
 
   const getPokemons = () => {
     fetch("https://pokeapi.co/api/v2/pokemon?limit=10&offset=0")
-    .then(response => response.json())
-    .then(data =>{
-      setPokemon(data.results)
-    } )
+      .then(response => response.json())
+      .then(data => {
+        setPokemon(data.results)
+      })
   };
 
   useEffect(() => {
@@ -37,12 +38,40 @@ function App() {
     console.log(pokemons)
   }, []);
 
+  
+//   const [inputValue, setInputValue] = useState(""); // Estado para almacenar el valor del input
+
+//   const handleInputChange = (event) => {
+//       setInputValue(event.target.value); // Actualiza el estado con el nuevo valor del input
+// };
+
+const [inputValue, setInputValue] = useState("");
+
+const handleChangeInput = (event) => {
+  setInputValue(event.target.value)
+}
+
 
   return (
     <div>
-       <h2>Pokemons</h2>
+      {/* PRACTICA DE RUTAS */}
+      <Routing />
 
-       {/*PRACTICA CON POKE API */}
+      {/* PRACTICA EVENTOS  */}
+      <div>
+        <input
+          type="text"
+          value={inputValue}
+          onChange={handleChangeInput}
+          placeholder="Escribe algo..."
+        />
+        <p>Valor del input: {inputValue}</p>
+      </div>
+
+
+      {/* <h2>Pokemons</h2> */}
+
+      {/*PRACTICA CON POKE API */}
       {/* <div>
       {pokemons ? (
           pokemons.map((poke) => (
@@ -53,15 +82,15 @@ function App() {
         )}
       </div> */}
 
-        {/* PRACTICA HOC */}
-        <ComponentWithLogging/>
+      {/* PRACTICA HOC */}
+      {/* <ComponentWithLogging/> */}
 
-        {/* <ListItemContainer productos={data}/> */}
+      {/* <ListItemContainer productos={data}/> */}
 
 
       {/* <Montaje /> */}
 
-    
+
     </div>
   );
 }
