@@ -1,6 +1,6 @@
 # Comisión 57870 - CoderHouse
 
- Este proyecto fue creado a modo de documentacion de la informacion del curso 57870 de React JS Flex de Coderhouse, para que los alumnos tengan registro de cada una de las actividades.
+*** Este proyecto fue creado a modo de documentacion de la informacion del curso 57870 de React JS Flex de Coderhouse, para que los alumnos tengan registro de cada una de las actividades. ***
 
  ### Temas principales 
  * Componentes
